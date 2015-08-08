@@ -7,7 +7,9 @@ i2pcontrol_url = "http://127.0.0.1:7650/"
 
 def resp_html(s):
     """Response to GET requests with actual documents"""
-    legal_files = ["/js/lib/underscore-min.js", "/js/app.js", "/favicon.ico", "/css/main.css"]
+    legal_files = ["/js/lib/underscore-min.js", "/js/app.js", "/favicon.ico",
+            "/js/functions.js",
+            "/css/main.css"]
 
     if s.path == "/":
         s.send_response(200)
