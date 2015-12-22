@@ -111,7 +111,7 @@ function fetchStats() {
         "i2p.router.netdb.knownpeers": "",
         "i2p.router.net.bw.inbound.1s": "",
         "i2p.router.net.bw.outbound.1s": "",
-        //"Token": window.token
+        "Token": window.token
     });
 
     doAjax(function(){
@@ -144,4 +144,44 @@ function router() {
         if (window.refresh) clearInterval(window.refresh); 
         route.controller();
     }
+}
+
+/*
+ *  Do RouterManager request and reload on success
+ */
+function dumbRequest(data) {
+    doAjax(function() {
+        if (this.readyState == 4 && this.status == "200") 
+            window.location.reload();
+    }, _jrc("RouterManager", data));
+}
+
+function frontPageEvents() {
+    _id("restart").addEventListener('click', function() {
+        dumbRequest({"Restart": null, "Token": window.token});
+    });
+    _id("reseed").addEventListener('click', function(){
+        dumbRequest({"Reseed": null, "Token": window.token});
+    });
+    _id("shutdown").addEventListener('click', function(){
+        dumbRequest({"Shutdown": null, "Token": window.token});
+    });
+}
+
+function configPageEvents() {
+    _id("config-form").addEventListener('submit', function(evt) {
+        evt.preventDefault();
+        var form = _id("config-form");
+        doAjax(function() {
+            if (this.readyState == 4 && this.status == "200") {
+                alert("Network settings changed!");
+            }
+        }, _jrc("NetworkSetting", {
+            "i2p.router.net.bw.in": form.bwin.value,
+            "i2p.router.net.bw.out": form.bwout.value,
+            "i2p.router.net.bw.share": form.bwshare.value,
+            "Token": window.token,
+        }));
+        return false;
+    });
 }

@@ -1,9 +1,10 @@
 import BaseHTTPServer
 import urllib2
 from os import sep
+import ssl
 
 listen_port = 8082
-i2pcontrol_url = "http://127.0.0.1:7650/"
+i2pcontrol_url = "https://127.0.0.1:7650/"
 
 def resp_html(s):
     """Response to GET requests with actual documents"""
@@ -30,7 +31,8 @@ def proxy_request(data, s):
     req = urllib2.Request(i2pcontrol_url, data)
     print(data)
     try:
-        response = urllib2.urlopen(req)
+        gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+        response = urllib2.urlopen(req, context=gcontext)
         s.send_response(200)
         s.send_header("Content-Type", "application/json")
         s.end_headers()
