@@ -174,7 +174,9 @@ function configPageEvents() {
         var form = _id("config-form");
         doAjax(function() {
             if (this.readyState == 4 && this.status == "200") {
-                alert("Network settings changed!");
+                var result = JSON.parse(this.responseText).result;
+                if (result["SettingsSaved"] == true)
+                    alert("Network settings changed!");
             }
         }, _jrc("NetworkSetting", {
             "i2p.router.net.bw.in": form.bwin.value,

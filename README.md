@@ -11,6 +11,6 @@ Run i2pd with i2pcontrol port listening at 7650, for example:
 
 Then run web ui:
 
-    python run.py
+    python3 run.py
 
 Visit http://127.0.0.1:8082/ and enjoy fancy i2pd webui! ;)
