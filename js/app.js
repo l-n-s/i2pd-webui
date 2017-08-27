@@ -43,7 +43,7 @@ route("/config", function(){
     var jsonData = _jrc("NetworkSetting", {
         "i2p.router.net.bw.in": null,
         "i2p.router.net.bw.out": null,
-        "i2p.router.net.bw.share": null,
+        //"i2p.router.net.bw.share": null,
         "Token": window.token
     });
     basicRender("config", jsonData, configPageEvents);

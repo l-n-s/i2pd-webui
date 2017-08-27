@@ -181,7 +181,7 @@ function configPageEvents() {
         }, _jrc("NetworkSetting", {
             "i2p.router.net.bw.in": form.bwin.value,
             "i2p.router.net.bw.out": form.bwout.value,
-            "i2p.router.net.bw.share": form.bwshare.value,
+            //"i2p.router.net.bw.share": form.bwshare.value,
             "Token": window.token,
         }));
         return false;
